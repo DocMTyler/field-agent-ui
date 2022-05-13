@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import AgentDisplay from "./components/AgentDisplay";
+import {useState} from 'react';
+import AgentInput from "./components/AgentInput";
+import AddAgent from "./components/AddAgent";
+import DeleteAgent from "./components/DeleteAgent";
 
 function App() {
+  const [agent, setAgent] = useState({});
+  const [agentID, setAgentID] = useState();
+  const [deleteAgentID, setDeleteAgentID] = useState();
+  
+  const setID = () => {
+    setAgentID(agentID);
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AgentInput label="Enter Agent ID"
+                  value={agentID}
+                  onChange={(e) => setAgentID(e.target.value)}
+                  buttonAction={setID}/>
+
+      <AgentDisplay id={agentID}/>
+
+      <AddAgent />
+      <br></br>
+      <AgentInput label="Enter Agent ID"
+                  value={deleteAgentID}
+                  onChange={(e) => setDeleteAgentID(e.target.value)}
+                  buttonAction={setID}/>
+      <DeleteAgent id={deleteAgentID}/>
     </div>
   );
 }
